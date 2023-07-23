@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
 
+@Repository
 @Mapper
 public interface UserMapper {
 
@@ -18,7 +20,7 @@ public interface UserMapper {
     public List<User> read();
 
     @Update("update users set name = #{name} where id = #{id}")
-    public boolean update(int id, String name);
+    public boolean update(String name, int id);
 
     @Delete("delete from users where id = #{id}")
     public boolean delete(int id);

@@ -14,29 +14,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
+    // @Autowired
+    // UserMapper userMapper;
+
     @Autowired
-    UserMapper userMapper;
+    UserService userService;
 
     //RequestBodyなので post時は 【row】を選択すればOK
     //パラメータが単一でない場合は json形式で投げれば良いはず
     @PostMapping("")
     public boolean create(@RequestBody String name) {
-        return userMapper.create(name);
+        return userService.create(name);
     }
 
     @GetMapping("")
     public List<User> read() {
-        return userMapper.read();
+        return userService.read();
+        //return userMapper.read();
     }
 
     @PatchMapping("/{id}")
+    //@PostMapping("/{id}")
     public boolean update(@PathVariable int id, @RequestBody String name) {
-        return userMapper.update(id, name);
+        return userService.update(name, id);
     }
 
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id) {
-        return userMapper.delete(id);
+        return userService.delete(id);
     }
     
 }
